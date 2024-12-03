@@ -4,7 +4,7 @@ import streamlit as st
 st.set_page_config(page_title="Doradz Photography", layout="wide")
 
 # Navigation tabs
-tabs = st.tabs(["About Me", "Weddings", "Events", "Portraits", "Studio", "Contact Form"])
+tabs = st.tabs(["About Me", "Weddings", "Events", "Portraits", "Studio", "Videos", "Contact Form"])
 
 
 # About Me tab
@@ -124,7 +124,9 @@ with tabs[3]:
             if photo_index < len(portrait_photos):
                 col.image(portrait_photos[photo_index], use_container_width=True)
 
-# Studio tab
+###############################################
+
+
 # Studio tab
 with tabs[4]:
     st.header("Studio")
@@ -155,12 +157,40 @@ with tabs[4]:
             photo_index = i * 3 + j
             if photo_index < len(studio_photos):
                 col.image(studio_photos[photo_index], use_container_width=True)
+    
+    
+###############################################
+
+# Videos tab
+with tabs[5]:
+    st.header("Videos")
+    st.write("Explore some of my favorite moments captured in motion.")
+
+    # List of video files in the media/videos folder
+    video_files = [
+        "media/videos/video1.mp4",
+        "media/videos/video2.mp4",
+        "media/videos/video3.mp4",
+        #"media/videos/video4.mp4",
+        #"media/videos/video5.mp4",
+        #"media/videos/video6.mp4",
+    ]
+
+    # Display videos in a 3-row grid
+    rows = len(video_files) // 3  # Calculate number of rows based on videos
+    for i in range(rows):
+        cols = st.columns(3)  # Create 3 columns for each row
+        for j, col in enumerate(cols):
+            video_index = i * 3 + j
+            if video_index < len(video_files):
+                video_path = video_files[video_index]
+                # Embed video
+                col.video(video_path)
                 
 ###############################################
 
-
 # Contact Form tab
-with tabs[5]:
+with tabs[6]:
     st.header("Contact Me")
     with st.form("contact_form"):
         name = st.text_input("Your Name")
@@ -170,5 +200,6 @@ with tabs[5]:
         submitted = st.form_submit_button("Send Message")
         if submitted:
             st.success(f"Thank you, {name}! Your message has been sent successfully.")
+
 
 #
